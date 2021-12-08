@@ -134,6 +134,7 @@ export default {
       salaryPayment: "0",
       creditHistory: "0",
       creditQuery: "0",
+      number: "0",
     };
   },
   mounted() {},
@@ -157,11 +158,21 @@ export default {
       return (val >= 1 && val < 100) || val === "";
     },
     onSubmit(values) {
-      console.log("submit", values);
       let obj = {
+        number: 0,
         ...values,
         ...this.$route.query,
       };
+      //推广线下渠道订单
+      //obj.number = this.$route.query.employeeNumber - 0;
+      //公司和专员订单和线上推广订单
+      obj.number = 0;
+      if (obj.number == 0) {
+        delete obj.number;
+      }
+
+      obj.antPoints = obj.antPoints - 0;
+      obj.antPoints = obj.antPoints - 0;
       if (
         !this.$route.query.employeeNumber ||
         this.$route.query.employeeNumber < 1000 ||
@@ -188,17 +199,20 @@ export default {
       });
       delete obj.smsCode;
       delete obj.sign;
+      console.log("submit", obj);
       //公司和专员订单:
-      /*instance.post('https://web.rongxinvip.com/weixin/add',obj)*/
+      //instance.post('https://web.rongxinvip.com/weixin/add',obj)
 
       //58推广订单：
-      /*instance.post('https://web.rongxinvip.com/58/add',obj)*/
-
+      //instance.post('https://web.rongxinvip.com/58/add',obj)
+      
       //百度推广订单：
-      instance
-        .post("https://web.rongxinvip.com/baidu/add", obj)
+      instance.post("https://web.rongxinvip.com/baidu/add", obj)
 
+      //推广线下渠道订单
+      //instance.post("https://spd.jinxianghua.com/offline/add", obj)
         .then((res) => {
+          console.log("res", res);
           if (res.data.code === 0 && res.data.data !== 0) {
             //成功有额度
             this.loadFlag = true;

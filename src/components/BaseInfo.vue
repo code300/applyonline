@@ -112,7 +112,7 @@
     </div>
     <div class="footer">
       <div>开发者 成都融信信息技术服务有限公司</div>
-      <div>蜀ICP备2020030967号-1</div>
+      <div>蜀ICP备2020030967号-3</div>
     </div>
   </div>
 </template>
@@ -194,7 +194,7 @@ export default {
         this.uid = Date.parse(new Date());
       }
       axios
-        .get(`https://web.rongxinvip.com/weixin/getAppSign?code=${this.uid}`)
+        .get(`https://quota.rongxinvip.com/offline/getAppSign?code=${this.uid}`)
         .then((res) => {
           if (res.data.code === 0) {
             this.sign = res.data.data;
@@ -222,7 +222,7 @@ export default {
       }
 
       axios
-        .get(`https://web.rongxinvip.com/weixin/getAppSign?code=${this.uid}`)
+        .get(`https://quota.rongxinvip.com/offline/getAppSign?code=${this.uid}`)
         .then((res) => {
           if (res.data.code === 0) {
             this.sign = res.data.data;
