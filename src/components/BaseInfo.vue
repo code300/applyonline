@@ -194,7 +194,10 @@ export default {
         this.uid = Date.parse(new Date());
       }
       axios
-        .get(`https://quota.rongxinvip.com/offline/getAppSign?code=${this.uid}`)
+        //公司和专员订单和线上推广订单
+        .get(`https://web.rongxinvip.com/weixin/getAppSign?code=${this.uid}`)
+        //推广线下渠道订单
+        //.get(`https://quota.rongxinvip.com/offline/getAppSign?code=${this.uid}`)
         .then((res) => {
           if (res.data.code === 0) {
             this.sign = res.data.data;

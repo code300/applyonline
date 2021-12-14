@@ -1,6 +1,5 @@
 <template>
   <div class="bg">
-    <div class="top"></div>
     <div class="box">
       <div class="title">锦 享 花</div>
       <div class="title-small">有资金需求您就来</div>
@@ -30,6 +29,7 @@
       </div>
       <div class="bottom">多元化贷款方式，总有适合您得产品</div>
     </div>
+    <div class="top"></div>
   </div>
 </template>
 
@@ -95,7 +95,7 @@ export default {
   right: 0;
   margin: 0 15px;
   bottom: 0;
-  z-index: 1;
+  z-index: 2;
 }
 .title {
   color: #fff;
@@ -122,8 +122,7 @@ p {
    padding: 5px 0 0 15px;
 }
 .card-bottom {
-  width: 90%;
-  margin: 10px 0 0 0;
+  margin-top: 10px;
   padding: 5px 15px;
   background-color: white;
 }
