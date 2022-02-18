@@ -201,16 +201,17 @@ export default {
       delete obj.sign;
       console.log("submit", obj);
       //公司和专员订单:
-      instance.post('https://web.rongxinvip.com/weixin/add',obj)
-       
-      //58推广订单：
+      instance;
+      //.post("https://web.rongxinvip.com/weixin/add", obj)
+
+      //推广A渠道(百度)订单：
+      instance.post("https://web.rongxinvip.com/baidu/add", obj)
+
+      //推广B渠道(58)订单：
       //instance.post('https://web.rongxinvip.com/58/add',obj)
-        
-      //百度推广订单：
-      //instance.post("https://web.rongxinvip.com/baidu/add", obj)
-      
+    
       //推广线下渠道订单
-      //instance.post("https://spd.jinxianghua.com/offline/add", obj)
+      // instance.post("https://spd.jinxianghua.com/offline/add", obj)
         .then((res) => {
           console.log("res", res);
           if (res.data.code === 0 && res.data.data !== 0) {

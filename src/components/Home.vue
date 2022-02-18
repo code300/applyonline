@@ -28,7 +28,7 @@ export default {
   justify-content: space-between;
   padding-top: 2px;
 }
-.card .maintain .number {
+.card .maintain .number {   
   font-size: 20px;
 }
 .card .maintain .card-btn {

@@ -223,7 +223,6 @@ export default {
       if (this.uid == "") {
         this.uid = Date.parse(new Date());
       }
-
       axios
         .get(`https://quota.rongxinvip.com/offline/getAppSign?code=${this.uid}`)
         .then((res) => {

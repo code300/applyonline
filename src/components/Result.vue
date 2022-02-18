@@ -17,8 +17,7 @@
     />
     <div
       v-show="!$route.query.success || $route.query.success === '2'"
-      class="message_wrong"
-    >
+      class="message_wrong">
       系统审核未通过
     </div>
     <div class="name">{{ $route.query.clientName }}</div>
