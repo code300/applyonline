@@ -160,26 +160,15 @@ export default {
     onSubmit(values) {
       let obj = {
         number: 0,
+        domain: "apply.jinxianghua.com",
         ...values,
         ...this.$route.query,
       };
-      //推广线下渠道订单
-      //obj.number = this.$route.query.employeeNumber - 0;
-      //公司和专员订单和线上推广订单
-      obj.number = 0;
+      obj.number = this.$route.query.number - 0;
       if (obj.number == 0) {
         delete obj.number;
       }
-
       obj.antPoints = obj.antPoints - 0;
-      obj.antPoints = obj.antPoints - 0;
-      if (
-        !this.$route.query.employeeNumber ||
-        this.$route.query.employeeNumber < 1000 ||
-        this.$route.query.employeeNumber > 99999
-      ) {
-        delete obj.employeeNumber;
-      }
       if (obj.estateValue == "") {
         delete obj.estateValue;
       } else {
@@ -199,17 +188,18 @@ export default {
       });
       delete obj.smsCode;
       delete obj.sign;
+      console.log("requestKey", this.$route.query.sign);
       console.log("submit", obj);
+      //http://106.52.114.109:8080
       //公司和专员订单:
-      //instance.post("https://web.rongxinvip.com/weixin/add", obj)
-
-      //推广A渠道(百度)订单：
       instance
-        .post("https://web.rongxinvip.com/baidu/add", obj)
-
+        .post("https://apponline.jinxianghua.com/jxh/add", obj)
+        //推广A渠道(百度)订单：
+        //instance.post("https://web.rongxinvip.com/baidu/add", obj)
+        
         //推广B渠道(58)订单：
         //instance.post('https://web.rongxinvip.com/58/add',obj)
-
+        
         //推广线下渠道订单
         // instance.post("https://spd.jinxianghua.com/offline/add", obj)
         .then((res) => {

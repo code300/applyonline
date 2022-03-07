@@ -7,7 +7,9 @@
         <p class="text-a">最高可借额度（元）</p>
         <p class="text-number">100,0000</p>
         <p class="text">月息0.3%起（10000元借1天 利息1元起）</p>
-        <div class="text-bottom">正规平台&nbsp;&nbsp;&nbsp;&nbsp;灵活借还&nbsp;&nbsp;&nbsp;&nbsp;快速审批&nbsp;&nbsp;&nbsp;&nbsp;不查征信</div>
+        <div class="text-bottom">
+          正规平台&nbsp;&nbsp;&nbsp;&nbsp;灵活借还&nbsp;&nbsp;&nbsp;&nbsp;快速审批&nbsp;&nbsp;&nbsp;&nbsp;不查征信
+        </div>
       </div>
       <div class="text-flex">
         <p>借款期限</p>
@@ -32,7 +34,6 @@
     <div class="top"></div>
   </div>
 </template>
-
 <script>
 export default {
   name: "Start",
@@ -42,12 +43,20 @@ export default {
   methods: {
     toHome() {
       let vm = this;
+      let numberValue = 0;
+      let employeeNumber = vm.$route.query.employeeNumber;
+      let number = vm.$route.query.number;
+      if (employeeNumber && employeeNumber > 0) {
+        numberValue = employeeNumber;
+      } else if (number && number > 0) {
+        numberValue = number;
+      }
+      if (10000 < numberValue || numberValue < 100) {
+        numberValue = 0;
+      }
       this.$router.push({
         path: "/BaseInfo",
-        //公司和专员订单和线上推广订单
-        query: { employeeNumber: vm.$route.query.employeeNumber },
-        //线下推广订单
-        //query: { employeeNumber: vm.$route.query.number },
+        query: { number: numberValue },
       });
     },
   },
@@ -118,8 +127,8 @@ p {
 .text {
   padding: 5px 0;
 }
-.text-a{
-   padding: 5px 0 0 15px;
+.text-a {
+  padding: 5px 0 0 15px;
 }
 .card-bottom {
   margin-top: 10px;

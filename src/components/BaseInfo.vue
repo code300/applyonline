@@ -193,16 +193,19 @@ export default {
       if (this.uid == "") {
         this.uid = Date.parse(new Date());
       }
+      //http://106.52.114.109:8080
       axios
         //公司和专员订单和线上推广订单
-        .get(`https://web.rongxinvip.com/weixin/getAppSign?code=${this.uid}`)
+        .get(
+          `https://apponline.jinxianghua.com/jxh/getAppSign?code=${this.uid}`
+        )
         //推广线下渠道订单
         //.get(`https://quota.rongxinvip.com/offline/getAppSign?code=${this.uid}`)
         .then((res) => {
           if (res.data.code === 0) {
+            console.log("token", res.data.data);
             this.sign = res.data.data;
           }
-          console.log("res", res);
         });
     },
     sendMsg() {
