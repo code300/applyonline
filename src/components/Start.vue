@@ -56,7 +56,7 @@ export default {
       }
       this.$router.push({
         path: "/BaseInfo",
-        query: { number: numberValue },
+        query: { numberValue: numberValue },
       });
     },
   },

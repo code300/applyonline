@@ -134,7 +134,6 @@ export default {
       salaryPayment: "0",
       creditHistory: "0",
       creditQuery: "0",
-      number: "0",
     };
   },
   mounted() {},
@@ -159,15 +158,30 @@ export default {
     },
     onSubmit(values) {
       let obj = {
+        employeeNumber: 0,
         number: 0,
-        domain: "apply.jinxianghua.com",
+        /***************************修改1***************************/
+        //domain: "apply.jinxianghua.com",//公司和专员订单8003测试员工号
+        //domain: "spa.jinxianghua.com",//线上推广A渠道
+        //domain: "spb.jinxianghua.com", //线上推广B渠道
+        domain: "spd.jinxianghua.com", //线下合作推广
         ...values,
         ...this.$route.query,
       };
-      obj.number = this.$route.query.number - 0;
+        /***************************修改2***************************/
+      //其他订单
+      // delete obj.number;
+      // obj.employeeNumber = this.$route.query.numberValue - 0;
+      // if (obj.employeeNumber == 0) {
+      //   delete obj.employeeNumber;
+      // }
+      //线下合作推广
+      delete obj.employeeNumber;
+      obj.number = this.$route.query.numberValue - 0;
       if (obj.number == 0) {
         delete obj.number;
       }
+      delete obj.numberValue;
       obj.antPoints = obj.antPoints - 0;
       if (obj.estateValue == "") {
         delete obj.estateValue;
@@ -190,18 +204,18 @@ export default {
       delete obj.sign;
       console.log("requestKey", this.$route.query.sign);
       console.log("submit", obj);
-      //http://106.52.114.109:8080
+        /***************************修改3***************************/
       //公司和专员订单:
-      instance
-        .post("https://apponline.jinxianghua.com/jxh/add", obj)
-        //推广A渠道(百度)订单：
-        //instance.post("https://web.rongxinvip.com/baidu/add", obj)
-        
-        //推广B渠道(58)订单：
-        //instance.post('https://web.rongxinvip.com/58/add',obj)
-        
-        //推广线下渠道订单
-        // instance.post("https://spd.jinxianghua.com/offline/add", obj)
+      //instance.post("https://apponline.jinxianghua.com/jxh/add", obj)
+
+      //线上推广A渠道：
+      //instance.post("https://apponline.jinxianghua.com/501/add", obj)
+
+      //线上推广B渠道：
+      //instance.post("https://apponline.jinxianghua.com/502/add", obj)
+      
+      //线下合作推广
+      instance.post("https://apponline.jinxianghua.com/offline/add", obj)
         .then((res) => {
           console.log("res", res);
           if (res.data.code === 0 && res.data.data !== 0) {
