@@ -164,7 +164,7 @@ export default {
         //domain: "apply.jinxianghua.com",//公司和专员订单8003测试员工号
         //domain: "spa.jinxianghua.com",//线上推广A渠道
         //domain: "spb.jinxianghua.com", //线上推广B渠道
-        domain: "spd.jinxianghua.com", //线下合作推广
+        //domain: "spd.jinxianghua.com", //线下合作推广
         ...values,
         ...this.$route.query,
       };
@@ -210,7 +210,7 @@ export default {
 
       //线上推广A渠道：
       //instance.post("https://apponline.jinxianghua.com/501/add", obj)
-
+      
       //线上推广B渠道：
       //instance.post("https://apponline.jinxianghua.com/502/add", obj)
       

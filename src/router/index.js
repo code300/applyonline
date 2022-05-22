@@ -9,14 +9,6 @@ const router = new VueRouter({
       redirect: '/start'
     },
     {
-      path: '/home',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ '@/components/Home.vue'),
-      meta: {
-        index: 1
-      }
-    },
-    {
       path: '/start',
       name: 'start',
       component: () => import(/* webpackChunkName: "start" */ '@/components/Start.vue'),
