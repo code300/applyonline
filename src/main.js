@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import { Form } from 'vant';
 import { Field } from 'vant';
+import 'vant/lib/index.css';
 
 Vue.config.productionTip = false
 
