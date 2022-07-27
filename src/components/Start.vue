@@ -1,7 +1,7 @@
 <template>
   <div class="bg">
     <div class="box">
-      <div class="title">锦 享 花</div>
+      <div class="title">逸 享 花</div>
       <div class="title-small">有资金需求您就来</div>
       <div class="card">
         <p class="text-a">最高可借额度（元）</p>
