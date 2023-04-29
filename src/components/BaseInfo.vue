@@ -83,11 +83,11 @@
         required
         type="number"
         name="loanAmount"
-        label="额度需求"
-        placeholder="请输入额度需求(元)"
+        label="资金需求"
+        placeholder="请输入资金需求(元)"
         :rules="[
           { required: true, message: '' },
-          { validator: validatorMount, message: '额度应大于5000，小于500万' },
+          { validator: validatorMount, message: '资金应大于5000，小于500万' },
         ]"
       />
       <div style="margin: 26px 16px 16px 16px">
@@ -111,7 +111,7 @@
       <div>本平台不会涉及到用户隐私和征信查询等，请放心使用。</div>
     </div>
     <div class="footer">
-      <div>开发者 成都融信信息技术服务有限公司</div>
+      <div>开发者 成都融信信息服务有限公司</div>
       <div>蜀ICP备2020030967号-3</div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="bg">
     <div class="box">
-      <div class="title">逸 享 花</div>
+      <div class="title">锦 诚 金 服</div>
       <div class="title-small">有资金需求您就来</div>
       <div class="card">
         <p class="text-a">最高可借额度（元）</p>
@@ -27,7 +27,7 @@
         <p class="text postion-left">抵押贷：全款房、车、按揭房、车</p>
         <p class="text postion-left">经营贷：个体户、中小微企业经营6个月以上</p>
         <p class="text postion-left">芝麻信用贷：芝麻分550以上</p>
-        <p class="text postion-left">担保贷：不看征信、有固定工作或居住地</p>
+        <p class="text postion-left">工薪贷：不看征信、有固定工作或居住地</p>
       </div>
       <div class="bottom">多元化贷款方式，总有适合您得产品</div>
     </div>

@@ -31,6 +31,17 @@
           ]"
         />
         <van-field
+          v-model="providentFund"
+          type="number"
+          label-width="50px"
+          name="providentFund"
+          label="公积金"
+          placeholder="请输入公积金买时间（月）"
+          :rules="[
+            { validator: validatorMonth, message: '公积金不可超过120个月' },
+          ]"
+        />
+        <van-field
           v-model="insurancePolicy"
           type="number"
           label-width="40px"
@@ -64,9 +75,9 @@
           label-width="70px"
           name="annualIncome"
           label="个人收入"
-          placeholder="请输入年收入（万）"
+          placeholder="请输入月收入"
           :rules="[
-            { validator: validatorPerson, message: '个人收入最高100万' },
+            { validator: validatorPerson, message: '个人收入2000-1000000之间' },
           ]"
         />
         <van-field name="salaryPayment" label="收入方式" label-width="70px">
@@ -127,6 +138,7 @@ export default {
       loadFlag: false,
       antPoints: "",
       socialSecurity: "",
+      providentFund: "",
       insurancePolicy: "",
       estateValue: "",
       carValue: "",
@@ -134,10 +146,38 @@ export default {
       salaryPayment: "0",
       creditHistory: "0",
       creditQuery: "0",
+      host: "",
+      submitApi: "",
     };
+  },
+  created() {
+    this.host = location.host;
+    this.getSubmitApi();
   },
   mounted() {},
   methods: {
+    getSubmitApi() {
+      // https://apponline.jinxianghua.com/jxh/add  //公司员工提交接口
+      // https://apponline.jinxianghua.com/501/add  //501推广提交接口
+      // https://apponline.jinxianghua.com/502/add  //502推广提交接口
+      switch (this.host) {
+        case "spa.jinxianghua.com":
+          this.submitApi = "https://apponline.jinxianghua.com/501/add"; //501推广提交接口
+          break;
+        case "spb.jinxianghua.com":
+          this.submitApi = "https://apponline.jinxianghua.com/502/add"; //501推广提交接口
+          break;
+        case "spd.jinxianghua.com":
+          this.submitApi = "https://apponline.jinxianghua.com/offline/add"; //501推广提交接口
+          break;
+        case "apply.jinxianghua.com":
+          this.submitApi = "https://apponline.jinxianghua.com/jxh/add"; //公司员工提交接口
+          break;
+        default:
+          this.submitApi = "https://apponline.jinxianghua.com/501/add"; //501推广提交接口
+          break;
+      }
+    },
     validator(val) {
       return val > 350 && val < 950;
     },
@@ -154,21 +194,22 @@ export default {
       return (val >= 1 && val < 100) || val === "";
     },
     validatorPerson(val) {
-      return (val >= 1 && val < 100) || val === "";
+      return (val >= 2000 && val < 1000000) || val === "";
     },
     onSubmit(values) {
       let obj = {
         employeeNumber: 0,
         number: 0,
         /***************************修改1***************************/
-        domain: "apply.jinxianghua.com",//公司和专员订单8003测试员工号
+        // domain: "apply.jinxianghua.com", //公司和专员订单8003测试员工号
         //domain: "spa.jinxianghua.com",//线上推广A渠道
         //domain: "spb.jinxianghua.com", //线上推广B渠道
         //domain: "spd.jinxianghua.com", //线下合作推广
+        domain: this.host,
         ...values,
         ...this.$route.query,
       };
-        /***************************修改2***************************/
+      /***************************修改2***************************/
       //其他订单
       delete obj.number;
       obj.employeeNumber = this.$route.query.numberValue - 0;
@@ -204,18 +245,19 @@ export default {
       delete obj.sign;
       console.log("requestKey", this.$route.query.sign);
       console.log("submit", obj);
-        /***************************修改3***************************/
+      /***************************修改3***************************/
       //公司和专员订单:
-      instance.post("https://apponline.jinxianghua.com/jxh/add", obj)
+      instance
+        .post(this.submitApi, obj)
 
-      //线上推广A渠道：
-      //instance.post("https://apponline.jinxianghua.com/501/add", obj)
-      
-      //线上推广B渠道：
-      //instance.post("https://apponline.jinxianghua.com/502/add", obj)
-      
-      //线下合作推广
-      //instance.post("https://apponline.jinxianghua.com/offline/add", obj)
+        //线上推广A渠道：
+        //instance.post("https://apponline.jinxianghua.com/501/add", obj)
+
+        //线上推广B渠道：
+        //instance.post("https://apponline.jinxianghua.com/502/add", obj)
+
+        //线下合作推广
+        //instance.post("https://apponline.jinxianghua.com/offline/add", obj)
         .then((res) => {
           console.log("res", res);
           if (res.data.code === 0 && res.data.data !== 0) {
